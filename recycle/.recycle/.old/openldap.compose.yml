@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  openldap-server:
+    container_name: openldap-server
+    image: osixia/openldap
+    ports:
+      - 389:389
+      - 636:636
+    volumes:
+      - volume-openldap-server-database:/var/lib/ldap
+      - volume-openldap-server-configuration:/etc/ldap/slapd.d
+
+  openldap-web-admin:
+    depends_on:
+      - openldap-server
+    container_name: openldap-web-admin
+    image: osixia/phpldapadmin:latest
+    ports:
+      - 28080:80
+      - 28443:443
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap-server"
+      PHPLDAPADMIN_HTTPS: "false"
+
+volumes:
+  volume-openldap-server-database:
+    external: true
+  volume-openldap-server-configuration:
+    external: true

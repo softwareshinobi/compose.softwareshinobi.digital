@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  OpenProject-database:
+    image: mysql:latest
+    container_name: OpenProject-database
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "AfSnUG6ETo6pXvoUYAf4"
+    volumes:
+      - volume-OpenProject-database:/var/lib/mysql
+
+  OpenProject-phpmyadmin:
+   depends_on:
+     - OpenProject-database
+   image: phpmyadmin/phpmyadmin
+   container_name: OpenProject-phpmyadmin
+   restart: always
+   ports:
+     - 16080:80
+   environment:
+     PMA_HOST: OpenProject-database
+     MYSQL_ROOT_PASSWORD: "AfSnUG6ETo6pXvoUYAf4"
+
+  OpenProject-application:
+    depends_on:
+      - OpenProject-database
+    image: openproject/community:8
+    container_name: OpenProject-application
+    restart: always
+    ports:
+      - 16331:80
+    environment:
+      DATABASE_URL: "mysql2://root:AfSnUG6ETo6pXvoUYAf4@OpenProject-database:3306/openproject"
+      SECRET_KEY_BASE: "TaHS8APJf2GYiIuaOoCuCTaYx1jpf0Lmq97dIsZI"
+
+volumes:
+  volume-OpenProject-database:
+    external: true

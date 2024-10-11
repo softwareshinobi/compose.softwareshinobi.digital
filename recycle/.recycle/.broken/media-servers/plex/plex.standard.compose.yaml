@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+    embaNET-radio:
+
+        container_name: embaNET-radio
+
+        image: lscr.io/linuxserver/plex
+
+        restart: unless-stopped  
+
+        network_mode: host
+
+        environment:
+
+            - PUID=1000
+
+            - PGID=1000
+
+            - VERSION=docker
+
+        volumes:
+
+            - ./config:/config
+
+            - ./media:/media
+
+            - ./tv:/tv
+
+            - ./movies:/movies
+            

@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+
+
+    software-shinobi-diagram:
+
+        container_name: software-shinobi-diagram
+        
+        image: jgraph/drawio:latest   
+        
+        restart: always
+        
+        ports:
+            - 42998:8080
+
+
+    software-shinobi-clocks:
+    
+        container_name: software-shinobi-clocks
+
+        image: softwareshinobi/software-shinobi-pomodora-timer:latest
+
+        restart: always
+
+        ports:
+
+            - 42994:80

@@ -1,0 +1,30 @@
+    shinobi-net-source-control:
+
+        container_name: shinobi-net-source-control
+        
+        image: gitea/gitea:latest
+
+        restart: always
+        
+        environment:
+        
+            - USER_UID=1000
+            
+            - USER_GID=1000
+
+        volumes:
+
+            - ./volume-data-shinobinet.online/build-server/data-content:/data
+            
+            - ./volume-data-shinobinet.online/build-server/ssh-content:/data/git/.ssh
+
+            - /etc/timezone:/etc/timezone:ro
+            
+            - /etc/localtime:/etc/localtime:ro
+
+        ports:
+
+            - "44300:3000"
+
+            - "44322:22"
+       

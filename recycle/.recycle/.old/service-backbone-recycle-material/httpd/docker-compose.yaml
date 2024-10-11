@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+     com-softwareshinobi-resume:
+          container_name: com-softwareshinobi-resume
+          image: httpd:2.4
+          volumes:
+               - ./htdocs/:/usr/local/apache2/htdocs/
+          ports:
+               - "80:80"

@@ -1,0 +1,17 @@
+version: '3'
+
+networks:
+  network-software-shinobi:
+    external: true
+
+services:
+
+  software-shinobi-diagrams:
+    container_name: software-shinobi-diagrams
+    image: jgraph/drawio
+    restart: always
+    networks:
+    - network-software-shinobi
+    restart: always
+    ports:
+    - 8080:8080

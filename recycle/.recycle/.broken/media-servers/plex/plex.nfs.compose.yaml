@@ -1,0 +1,22 @@
+version: "3"
+services:
+  plex:
+    image: lscr.io/linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM=claim-stuffhere
+    volumes:
+      - ./config:/config
+      - nfs-video:/media
+    restart: unless-stopped  
+
+volumes:
+  nfs-video:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.1.1,nolock,soft,nfsvers=4"
+      device: ":/Videos"

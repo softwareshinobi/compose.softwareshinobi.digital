@@ -1,0 +1,28 @@
+    software-shinobi-radio:
+
+        container_name: software-shinobi-radio
+
+        hostname: software-shinobi-radio
+        
+        image: lscr.io/linuxserver/emby:latest
+
+        restart: always
+
+        environment:
+
+            - PUID=1000
+
+            - PGID=1000
+
+            - TZ=Etc/BOG
+
+        volumes:
+
+            - ./volume-data-softwareshinobi.online/media-server/configuration:/config
+
+            - ./volume-data-softwareshinobi.online/media-server/media:/media
+
+        ports:
+
+            - 42996:8096
+
